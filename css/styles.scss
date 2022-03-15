@@ -1,0 +1,118 @@
+$color-borders: #ddd;
+$colorTextGray: #666;
+$colorGrayBackground: #999;
+$colorPrimary: #0d6efd;
+
+* {
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#container {
+    width: 90%;
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#stock {
+    width: 100%;
+    margin-bottom: 30px;
+    border: 2px solid $color-borders;
+    padding: 1em 2em;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .product {
+        border: 2px solid $color-borders;
+        padding: 1em 2em;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .productName {
+            font-weight: bold;
+        }
+        .productCost {
+            color: $colorTextGray;
+            margin: 5px;
+        }
+    }
+}
+
+#car {
+    width: 100%;
+
+    #carList {
+        width: 100%;
+        list-style: none;
+    }
+
+    .carItem {
+        width: 100%;
+        margin-bottom: 10px;
+        border: 2px solid $color-borders;
+        border-radius: 5px;
+
+        .itemHead {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px 5px 0px 0px;
+            background-color: $colorGrayBackground;
+            .amount {
+                background-color: $colorPrimary;
+                margin-right: 10px;
+                padding: 5px;
+                border-radius: 50px;
+                color: white;
+            }
+            .itemName {
+                color: white;
+            }
+        }
+        .itemBody {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px;
+
+            .itemTotal {
+                color: $colorTextGray;
+            }
+            .cost {
+                color: $colorTextGray;
+            }
+            #btnAgregar {
+                margin-left: auto;
+            }
+            #btnQuitar {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    #carTotal {
+        display: none;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 10px;
+        border: 2px solid $color-borders;
+        border-radius: 5px;
+        color: $colorTextGray;
+        #btnFinCompra {
+            margin-left: auto;
+        }
+    }
+}
