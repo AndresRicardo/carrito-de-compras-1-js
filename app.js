@@ -1,6 +1,7 @@
 const carList = document.querySelector("#carList");
 let carItems = carList.querySelectorAll(".carItem");
 const carItemTemplate = document.querySelector("#carItemTemplate");
+const carTotal = document.querySelector("#carTotal");
 // const carItem = carItemTemplate.content.firstElementChild.cloneNode(true);
 // const fragment = document.createDocumentFragment();
 
@@ -27,7 +28,7 @@ const stock = {
     },
 };
 
-const car = {}; //todos los objetos (productos) agregados al carrito
+const car = {}; //objeto con todos los productos agregados en el carrito
 
 updateValues = (car, itemInteres, pId) => {
     console.log(`updateValues()`);
@@ -179,6 +180,38 @@ quitFromCar = (stock, car, targetPid) => {
     }
 };
 
+updateTotal = (car) => {
+    console.log("en updateTotal()");
+    console.log(car);
+    let valorTotal = 0;
+
+    for (const item in car) {
+        if (item !== "totales")
+            valorTotal += car[item].price * car[item].quantity;
+    }
+
+    console.log(valorTotal);
+
+    car["totales"] = Object.assign(
+        {},
+        { subTotal: 0, iva: 0, total: valorTotal }
+    );
+
+    // console.log(car["totales"]);
+
+    carTotal.querySelector("#carTotalValue").textContent = car["totales"].total;
+
+    // console.log(carTotal);
+
+    if (car["totales"].total !== 0) {
+        carTotal.style.display = "flex";
+    } else {
+        carTotal.style.display = "none";
+    }
+
+    console.log(carTotal.style.display);
+};
+
 document.addEventListener("click", (event) => {
     if (stock[event.target.dataset.pid] != undefined) {
         //click en elemento en stock
@@ -187,9 +220,11 @@ document.addEventListener("click", (event) => {
         if (event.target.dataset.action === "add") {
             //click en btnAgregar
             addToCar(stock, car, event.target.dataset.pid);
+            updateTotal(car);
         } else if (event.target.dataset.action === "quit") {
             //click en btnQuitar
             quitFromCar(stock, car, event.target.dataset.pid);
+            updateTotal(car);
         }
     } else {
         console.log(`--- click en elemento no boton ---`);
